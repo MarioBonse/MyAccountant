@@ -1,0 +1,29 @@
+
+.description{
+  padding: 4px 1%;
+}
+
+.wraphomelists{
+  padding: 6px;
+  margin-left: 40px;
+}
+
+.wraphomelists li{
+  padding: 2px 0px;
+}
+
+.maintitle{
+  padding: 10px 8px 0 0;
+  text-align: center;
+  font-size: 1.7em;
+}
+
+.titledescription{
+ padding: 10px 8px 6px 6px;
+ text-align: center;
+ font-size: 1.7em;
+}
+
+.containerdescription{
+   padding: 0 30px;
+}

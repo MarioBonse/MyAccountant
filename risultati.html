@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Mario Bonsembiante">
+    <meta name="description" content="Produzione">
+    <title>MyAccountant</title>
+    <script src="js/mettilista.js"></script>
+    <script src="js/FormDate.js"></script>
+    <script src="js/ricerca.js"></script>
+    <script src="js/risultati.js"></script>
+    <script src="js/produzione.js"></script>
+    <script src="js/general.js"></script>
+    <script src="js/inserimenti.js"></script>
+    <link rel="icon" href="img/simbolo.jpg" type="image/jpg">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body onload="inizializza()">
+<div class = "totalcontainer">
+    <!-- Title and short description -->
+    <div class = "headercontainer">
+        <div id='HeaderWrap'>
+            <header>
+                <h2 class="MainTitle"><span id="MyAccountant">MyAccountant</span></h2>
+                <h5 class="MainSubtitle">A tool maintening accounting of your ice-cream shop</h5>
+            </header>
+        </div>
+        <!--Menù di navigazione-->
+        <nav>
+            <ul class="MainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ricettario.html">Ricettario</a></li>
+                <li ><a href="produzione.html" >Altre spese</a></li>
+                <li id="selezionato"><a href="#">Risultati</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- menù per inserire il risultato del giorno-->
+    <div class='MainWrap'>
+        <button class="accordion" onclick="espandi(this)">Inserisci il risultato del giorno</button>
+        <div class="panel" id = "pannelloricette">
+            <h3 class = "menutitle">Form per la inserire le vendite</h3>
+            <form id="RISU">
+                <div>
+                    <div class="WrapIngrediente">
+                        <h4 >Volete inserire una data diversa dalla corrente?</h4><br>
+                        <div><input type="radio" class = "sceltamultipla"  name = "GC" value = "0" checked onclick="disabilita()">
+                            <label>Data corrente</label></div>
+                        <div><input type="radio" class = "sceltamultipla" name = "GC" value = "1" onclick="abilita()">
+                            <label>Altra data</label></div>
+                    </div><br>
+                    <div  id = "databox">
+                        <div class = "WrapDataInizioLungoTermine">
+                            <input type="text" name = "datainizio" class="DataInizioLungoTermine" autocomplete="off" readonly>
+                        </div>
+                        <div>
+                            <div class = "WrapFormData">
+                                <div class = "HeaderFormData">
+                                    <a class ="MesePrecedente" onclick="meseprecedente('RISU', true)">&larr;</a>
+                                    <span class = "TitoloFormData"></span>
+                                    <a class = "MeseSuccessivo" onclick="mesesuccessivo('RISU', true)">&rarr;</a>
+                                </div>
+                                <div class = "BodyFormData">
+                                    <table class = "TableFormData">
+                                        <thead><tr>
+                                            <th>Lu</th><th>Ma</th><th>Me</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th>
+                                        </tr></thead>
+                                        <tbody>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="separa">
+                    <label>Ricavo totale dalle vendite</label><br>
+                    <span class="euro">
+                            <input type="number" class="medium" name="ricavo"><br>
+                    </span>
+                </div>
+                <h3 class = "menutitle">Quantità vendute durante la giornata</h3>
+                <div class="wrapmedio">
+
+
+                    <div class="WrapIngrediente">
+                        <label >Gusto</label><br>
+                        <input spellcheck="false" class="nomelista"  type='search' name='Nomeingr' onkeyup="CercaSuggerimentoGusto(this, event)" placeholder="Inserisci ingrediente già registrato.." autocomplete="off">
+                        <div class='Tendina'></div>
+                    </div>
+                    <div class="WrapQuanto">
+                        <label for="quanto">Quantità</label><br>
+                        <span class="kg">
+                            <input class="quantolista" type="number" name="quanto" id="quanto" placeholder="venduto nel giorno">
+                        </span>
+                    </div>
+                    <div class="WrapSmallButton">
+                      <label></label><br>
+                        <button type="button" class="SmallButton" id="gustbotton" onclick="InserisciGusto(0, 'pannelloricette')">Aggiungi</button>
+                    </div>
+                    <div class = "WrapListaSotto">
+                        <ul class ="ListaSotto"></ul>
+                    </div>
+                </div>
+
+                <h3 class = "menutitle">Oggetti venduti/consumati durante la giornata</h3>
+                <div class="wrapmedio">
+                    <div class="WrapIngrediente">
+                        <label>Oggettistica</label><br>
+                        <input spellcheck="false" class="nomelista" id='oggettobox' type='search' name='gustobox' onkeyup="CercaSuggerimentoOggetto(this, event)"  placeholder="Inserisci oggetto già registrato.." autocomplete="off">
+                        <div class='Tendina'></div>
+                    </div>
+                    <div class="WrapQuanto">
+                        <label for="quanto2">Quantità</label><br>
+                            <input class="quantolista"  type="number" name="quanto2" id="quanto2" placeholder="pezzi venduti durante la giornata">
+                    </div>
+                    <div class="WrapSmallButton">
+                      <label></label><br>
+                        <button type="button" class="SmallButton" onclick="InserisciOggetto(1, 'pannelloricette')">Aggiungi</button>
+                    </div>
+                    <div class = "WrapListaSotto">
+                        <ul class ="ListaSotto"></ul>
+                    </div>
+                </div>
+                <button type="button"  class="BigButton" onclick="InserisciRisultato()">Inserisci produzione</button>
+            </form>
+        </div>
+
+
+        <!--menù per vedere i risultati dei giorni precedenti-->
+        <button class="accordion" onclick="espandi(this)">visualizza Risultati</button>
+        <div class="panel" id = "panel2">
+            <h3 class = "menutitle">Visualizza i dati della produzione</h3>
+            <form id="SchegliProd">
+                <label>Inserire il giorno di cui si vuole vedere la produzione</label><br>
+                <div class="wrapmedio">
+                    <div>
+                        <div id ="WrapDataScomparsa">
+                            <div class = "WrapDataInizioLungoTermine">
+                                <input type="text" name = "datainizio" class="DataInizioLungoTermine" autocomplete="off" readonly>
+                            </div>
+                            <div id = "DataScomparsa">
+                                <div class = "WrapFormData">
+                                    <div class = "HeaderFormData">
+                                        <a class ="MesePrecedente" onclick="meseprecedente('SchegliProd', false)">&larr;</a>
+                                        <span class = "TitoloFormData"></span>
+                                        <a class = "MeseSuccessivo" onclick="mesesuccessivo('SchegliProd', false)">&rarr;</a>
+                                    </div>
+                                    <div class = "BodyFormData">
+                                        <table class = "TableFormData">
+                                            <thead><tr>
+                                                <th>Lu</th><th>Ma</th><th>Me</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th>
+                                            </tr></thead>
+                                            <tbody>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="WrapSmallButton">
+                            <button type="button" class="SmallButton"  onclick="caricarisultato()">Seleziona</button>
+                        </div>
+                    </div>
+                    <!--<select name="tipo" form="PROD" class = "seleziona">
+                        <option value="0">Giornaliero</option>
+                        <option value="1">Mensile</option>
+                        <option value="2">Anuale</option>
+                    </select>-->
+                </div>
+            </form>
+            <div id="vedirisultato">
+              <h3 class = "titolorisultato"></h3>
+              <div id = "wraprisultati">
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+              <div class = "wrapresult">
+                <h4 class = "titolotabellaresult">Gusti venduti durante la giornata</h4>
+                <table class = "result">
+                <tr>
+                  <th>Nome</th>
+                  <th>Quantità</th>
+                  <th>Costo Della produzione totale</th>
+                  <th>Costo Della produzione al kg</th>
+                  </tr>
+                </table>
+              </div>
+              <div class = "wrapresult">
+                <h4 class = "titolotabellaresult">Spese a lungo termine ammortizzate durante la giornata</h4>
+                <table class = "result">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Impatto sulla giornata</th>
+                    </tr>
+                  </table>
+                </div>
+              <div class = "wrapresult">
+                <h4 class = "titolotabellaresult">Ingredienti consumanti durante la giornata</h4>
+                <table class = "result">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Quantità</th>
+                    <th>Costo</th>
+                    </tr>
+                </table>
+              </div>
+              <div class = "wrapresult">
+                <h4 class = "titolotabellaresult">Oggetti di produzione consumati durante la giornata</h4>
+                <table class = "result">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Quantità</th>
+                    <th>Costo totale</th>
+                    <th>Costo al pezzo</th>
+                    </tr>
+                </table>
+              </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="modalcontainer">
+        <!-- Modal window to download a circuit -->
+        <div id="BoxScheda" class="scheda">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+    </div>
+
+
+    <div id = 'result'></div>
+  </div>
+</body>
+</html>

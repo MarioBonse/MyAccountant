@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Mario Bonsembiante">
+    <meta name="description" content="Produzione">
+    <title>MyAccountant</title>
+    <script src="js/SpeseLungoTermine.js"></script>
+    <script src="js/PaginazioneUtility.js"></script>
+    <script src="js/produzione.js"></script>
+    <script src="js/FormDate.js"></script>
+    <script src="js/VisualizzazioneOggetti.js"></script>
+    <script src="js/mettilista.js"></script>
+    <script src="js/ricerca.js"></script>
+    <script src="js/general.js"></script>
+    <script src="js/inserimenti.js"></script>
+    <link rel="icon" href="img/simbolo.jpg" type="image/jpg">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body onload="preparatabelle('SPESALT')">
+  <div class ="totalcontainer">
+    <!-- Title and short description -->
+    <div class = "headercontainer">
+        <div id='HeaderWrap'>
+            <header>
+                <h2 class="MainTitle"><span id="MyAccountant">MyAccountant</span></h2>
+                <h5 class="MainSubtitle">A tool maintening accounting of your ice-cream shop</h5>
+            </header>
+        </div>
+        <!--Menù di navigazione-->
+        <nav>
+            <ul class="MainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ricettario.html">Ricettario</a></li>
+                <li id="selezionato"><a href="#" >Altre spese</a></li>
+                <li><a href="risultati.html">Risultati</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class='MainWrap'>
+        <!-- Menù per inserire gli oggetti che vengono venduti-->
+        <button class="accordion" onclick="espandi(this)">Inserisci oggetti</button>
+        <div class="panel" >
+            <h3 class = "menutitle">Form per nuovi oggetti</h3>
+            <form id="OGG">
+                <div class="WrapIngrediente">
+                  <label for="NomeOggetto">Nome del nuovo oggetto</label><br>
+                  <input  class="big" id="NomeOggetto" name="NomeOggetto" placeholder="Inserire il nome del nuovo oggetto..">
+                </div>
+                <div class="WrapQuanto">
+                    <label for="Prezzo">Prezzo</label><br>
+                    <span class="euro">
+                        <input class="big" type="number"  id="Prezzo" name="Prezzo" placeholder="Al pezzo..">
+                    </span><br>
+                </div>
+                <button type="button" class="BigButton" onclick="InserisciNuovoOggetto()">Aggiungi</button>
+            </form>
+        </div>
+
+
+        <!--Menù per vedere gli oggetti della produzione e modificarli-->
+        <button class="accordion" onclick="VediListaOggetti(this)">Visualizza oggetti</button>
+        <div class="panelTabella">
+            <h3 class = "menutitle">Tabella degli oggetti</h3>
+                <table class = "classic" id ="TabellaVisualizzazioneOggetti"></table>
+            <div class = "WrapPagination"><div class = "paginazione"></div></div>
+        </div>
+        <!-- -->
+        <button class="accordion" onclick="espandi(this)">Inserisci Spesa a lungo termine</button>
+        <div class="panel" >
+            <h3 class = "menutitle">Form per nuova spesa a lungo termine</h3>
+            <form id="SPESALT">
+                <div class = "ContenitoreData">
+                <div class = "WrapDataInizioLungoTermine">
+                    <label>Data iniziale</label><br>
+                    <input type="text" name = "datainizio" class="DataInizioLungoTermine" autocomplete="off" readonly onclick="CambiaDataInizio('SPESALT')">
+                </div>
+                <div class = "WrapDataFineLungoTermine">
+                    <label>Data finale</label><br>
+                    <input type="text" name = "datafine" class="DataFineLungoTermine" value = "--/--/--" autocomplete="off" readonly onclick="CambiaDataFine('SPESALT')">
+                </div>
+                <div class = "WrapFormData">
+                    <div class = "HeaderFormData">
+                        <a class ="MesePrecedente" onclick="meseprecedente('SPESALT', true)">&larr;</a>
+                        <span class = "TitoloFormData"></span>
+                        <a class = "MeseSuccessivo" onclick="mesesuccessivo('SPESALT', true)">&rarr;</a>
+                    </div>
+                    <div class = "BodyFormData">
+                        <table class = "TableFormData">
+                            <thead><tr>
+                                <th>Lu</th><th>Ma</th><th>Me</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th>
+                            </tr></thead>
+                            <tbody>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                <div class = "contenitoreinputspeselungotermine">
+                    <div class = "WrapNomeSpesaLungoTermine">
+                    <label for="Prezzo">Nome della spesa a lungo termine</label><br>
+                    <input class = "inputspesalungotermine" type="text"  name="Nome" placeholder="Nome.."><br>
+                    </div>
+                    <label for="Prezzo">Prezzo da pagare</label><br>
+                    <span class="euro">
+                        <input class="inputspesalungotermine" type="number" name="Prezzo" placeholder="Prezzo..">
+                    </span><br>
+
+                </div>
+                <button type="button" class="BigButton" onclick="inserisciNuovaSpesaLungoTermine()">Aggiungi</button>
+            </form>
+        </div>
+        <!--Menù per vedere gli oggetti della produzione e modificarli-->
+        <button class="accordion" onclick="MostraSLT(this)">Visualizza Spese a lungo termine</button>
+        <div class="panelTabella">
+            <h3 class = "menutitle">Tabella delle SLT</h3>
+            <table class = "classic" id ="TabellaVisualizzazioneSLT"></table>
+            <div class = "WrapPagination"><div class = "paginazione"></div></div>
+        </div>
+    </div>
+
+
+    <div id="modalcontainer">
+        <div id="BoxSchedaSLT" class="scheda">
+            <span class = "closebutton" onclick="ChiudiSceda()">&times;</span>
+            <h3 class = "menutitle">Form per nuova spesa a lungo termine</h3>
+            <div class = "WrapModificaSLT">
+                <form id="MODIFICASLT">
+                    <div class = "ContenitoreData">
+                        <div class = "WrapDataInizioLungoTermine">
+                            <label>Data iniziale</label><br>
+                            <input type="text" name = "datainizio" class="DataInizioLungoTermine" autocomplete="off" readonly onclick="CambiaDataInizio('MODIFICASLT')">
+                        </div>
+                        <div class = "WrapDataFineLungoTermine">
+                            <label>Data finale</label><br>
+                            <input type="text" name = "datafine" class="DataFineLungoTermine" value = "--/--/--" autocomplete="off" readonly onclick="CambiaDataFine('MODIFICASLT')">
+                        </div>
+                        <div class = "WrapFormData">
+                            <div class = "HeaderFormData">
+                                <a class ="MesePrecedente" onclick="meseprecedente('MODIFICASLT', true)">&larr;</a>
+                                <span class = "TitoloFormData"></span>
+                                <a class = "MeseSuccessivo" onclick="mesesuccessivo('MODIFICASLT', true)">&rarr;</a>
+                            </div>
+                            <div class = "BodyFormData">
+                                <table class = "TableFormData">
+                                    <thead><tr>
+                                        <th>Lu</th><th>Ma</th><th>Me</th><th>Gio</th><th>Ven</th><th>Sab</th><th>Dom</th>
+                                    </tr></thead>
+                                    <tbody>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "contenitoreinputspeselungotermine">
+                        <div class = "WrapNomeSpesaLungoTermine">
+                            <label for="Prezzo">Nome della spesa a lungo termine</label><br>
+                            <input class = "inputspesalungotermine" type="text"  name="Nome" placeholder="Nome.."><br>
+                        </div>
+                        <label for="Prezzo">Prezzo da pagare</label><br>
+                        <span class="euro">
+                            <input class="inputspesalungotermine" type="number" name="Prezzo" placeholder="Prezzo..">
+                        </span><br>
+
+                    </div>
+                    <button type="button" class="BigButton" onclick="EseguiModificaSLT()">Modifica</button>
+                </form>
+            </div>
+        </div>
+        <div id="BoxSchedaPiccolo" class="scheda">
+            <span class = "closebutton" onclick="NascondiScheda('BoxSchedaPiccolo')">&times;</span>
+            <div class = "WrapBoxPiccolo">
+                <h3 class = "menutitle">Modifica il seguente articolo</h3>
+                <form id="MODOGG">
+                    <div class = "WrapIngrediente">
+                        <label>Nuovo nome dell'articolo</label><br>
+                        <input  class="big" name="NomeOggetto" autocomplete="off">
+                    </div>
+                    <div class="WrapQuanto">
+                        <label>Prezzo</label><br>
+                            <span class="euro">
+                                <input class="big" type="number" name="Prezzo">
+                            </span><br>
+                    </div>
+                        <div class = "WrapEliminabutton2">
+                          <label></label><br>
+                            <button type="button" class="SchedaElimina" onclick="EliminaOggetto()">Elimina</button>
+                        </div>
+                    <button type="button" class="BigButton" onclick="EseguiModificaOggetto()">Modifica</button>
+                </form>
+              </div>
+            </div>
+        </div>
+
+
+    <div id = 'result'></div>
+  </div>
+</body>
+</html>

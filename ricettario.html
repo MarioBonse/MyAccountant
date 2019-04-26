@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Mario Bonsembiante">
+    <meta name="description" content="hhh">
+    <title>MyAccountant</title>
+    <script src="js/ricerca.js"></script>
+    <script src="js/VisualizzazioneRicettario.js"></script>
+    <script src="js/SchedaComparsaIngredienti.js"></script>
+    <script src="js/PaginazioneUtility.js"></script>
+    <script src="js/SchedaComparsaRicetta.js"></script>
+    <script src="js/mettilista.js"></script>
+    <script src="js/ModificaIngredienti.js"></script>
+    <script src="js/general.js"></script>
+    <script src="js/inserimenti.js"></script>
+    <script src="js/VisualizzazioneIngredienti.js"></script>
+    <link rel="icon" href="img/simbolo.jpg" type="image/jpg">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body >
+<div class ="totalcontainer">
+    <div class = "headercontainer">
+      <!-- Title and short description -->
+      <div id='HeaderWrap'>
+          <header>
+              <h2 class="MainTitle"><span id="MyAccountant">MyAccountant</span></h2>
+              <h5 class="MainSubtitle">A tool maintening accounting of your ice-cream shop</h5>
+          </header>
+      </div>
+      <!--Menù di navigazione-->
+      <nav>
+          <ul class="MainMenu">
+              <li><a href="index.html">Home</a></li>
+              <li id="selezionato"><a href="#">Ricettario</a></li>
+              <li><a href="produzione.html">Altre spese</a></li>
+              <li><a href="risultati.html">Risultati</a></li>
+          </ul>
+      </nav>
+    </div>
+  <!--corpo principale -->
+
+  <!--Inserisci ingrediente -->
+  <div class='MainWrap'>
+      <button class="accordion" onclick="espandi(this,0)">Inserisci ingrediente</button>
+      <div class="panel">
+          <h3 class = "menutitle">Form per nuovi ingredienti</h3>
+          <form id="INGR">
+              <label>Nome del nuovo ingrediente</label><br>
+              <input  class="big" name="NomeIngrediente" placeholder="Inserire il nome del nuovo ingrediente..">
+              <div class="WrapIngrediente">
+                  <label>Nome del fornitore</label><br>
+                  <input  class="big" name="Nomefornitore" placeholder="Inserire il nome del fornitore.."><br>
+              </div>
+              <div class="WrapQuanto">
+                  <label>Prezzo</label><br>
+                  <span class="euro">
+                      <input class="big" type="number" name="Prezzo" placeholder="Prezzo dell'ingrediente..">
+                  </span><br>
+              </div>
+              <button type="button" class="BigButton" onclick="InserisciNuovoIngrediente()">Aggiungi</button>
+          </form>
+      </div>
+
+
+  <!--modifica ingrediente -->
+
+      <button class="accordion" onclick="espandi(this,1)">modifica ingrediente</button>
+      <div class="panel" id ="PannelloModifica">
+          <h3 class = "menutitle">Scegliere un ingrediente</h3>
+          <form id="MOD">
+              <div>
+              <div class="WrapIngrediente">
+                  <label >Ingrediente</label><br>
+                  <input class="big"  type='search' name='Nomeingr' onkeyup="CercaSuggerimentoIngrediente(this, event)" placeholder="Inserisci ingrediente già registrato.." autocomplete="off">
+                  <div class='Tendina'></div>
+              </div>
+                  <div class="modificabutton">
+                      <button class="SmallButton" id="modbutton" type= "button" onclick="modifica('MOD')">Modifica</button>
+                  </div>
+              </div>
+              <div id="vediresto">
+                  <div id = "WrapTabellaIngredienteModifica">
+                  </div>
+                  <div id = "WrapTastoAnnullaModificaIngrediente"></div>
+              </div>
+          </form>
+      </div>
+
+
+  <!--inserimento ricetta-->
+
+
+      <button class="accordion" onclick="espandi(this)">Inserisci Ricetta</button>
+      <div class="panel" id="pannelloricette" >
+          <h3 class = "menutitle">Form per nuove ricette</h3>
+          <form id="RIC">
+              <label>Nome della ricetta</label><br>
+              <input  class="medium"  name="NomeRicetta" placeholder="Nome della ricetta.."><br>
+              <label>Descrizione</label>
+              <textarea id = "Descrizione" name="Descrizione" placeholder="Descrivi brevemente.." ></textarea>
+
+              <div class="wrapmedio">
+                  <div class="WrapIngrediente">
+                      <label>Ingredienti</label><br>
+                      <input class="nomelista"  type='search' name='Nomeingr' onkeyup="CercaSuggerimentoIngrediente(this, event)" placeholder="Inserisci ingrediente già registrato.." autocomplete="off">
+                      <div class='Tendina'></div>
+                  </div>
+                  <div class="WrapQuanto">
+                      <label>Quantità</label><br>
+                      <input class="quantolista" type="number" name="quantoingrediente" placeholder="Inserisci quantità">
+                  </div>
+                  <div class="WrapSmallButton">
+                      <label></label><br>
+                      <button type="button" class="SmallButton" onclick="InserisciIngrediente(0,'pannelloricette')">Aggiungi</button>
+                  </div>
+              </div>
+              <div class = "WrapListaSotto">
+                  <ul class ="ListaSotto"></ul>
+              </div>
+              <button type="button"  class="BigButton" onclick="InserisciNuovaRicetta(0)">Inserisci ricetta</button>
+          </form>
+      </div>
+
+  <!--visualizzazione ricette-->
+
+      <button class="accordion" onclick="ricettario(this)">Visualizza Ricette</button>
+      <div class="panelTabella">
+          <h3 class = "menutitle">Tabella delle ricette</h3>
+          <table class = "classic" id ="TabellVisualizzazioneRicette"></table>
+          <div class = "WrapPagination"><div class = "paginazione"></div></div>
+
+      </div>
+      <!--visualizzazione ingredienti-->
+      <button class="accordion" onclick="VediIngredienti(this)" >Visualizza Ingredienti</button>
+      <div class="panelTabella">
+          <h3 class = "menutitle">Tabella degli ingredienti</h3>
+          <table class = "classic" id ="TabellVisualizzazioneIngredienti"></table>
+          <div class = "WrapPagination"><div class = "paginazione"></div></div>
+
+      </div>
+  </div>
+
+
+  <!--Box per la visualizzazione delle ricette-->
+  <div id="modalcontainer">
+      <div id="BoxScheda" class="scheda">
+          <span class = "closebutton" onclick="ChiudiScedaGrande()">&times;</span>
+      </div>
+      <!-- box per modofica ingrediente-->
+      <div id="BoxSchedaPiccolo" class="scheda">
+          <span class = "closebutton" onclick="NascondiScheda('BoxSchedaPiccolo')">&times;</span>
+          <div class = "WrapBoxPiccolo">
+              <h3 class = "menutitle">Form per nuovi ingredienti</h3>
+              <form id="MODINGR">
+                  <label>Nuovo nome dell'ingrediente</label><br>
+                  <input  class="big" name="NomeIngrediente" autocomplete="off">
+                  <div class = "wraprigamodifica">
+                      <div class = "WrapIngrediente">
+                          <label>Nome fornitore</label><br>
+                          <input  class="big" name="Nomefornitore"><br>
+                      </div>
+                      <div class = "WrapQuanto">
+                          <label>Prezzo</label><br>
+                          <span class="euro">
+                              <input class="big" type="number" name="Prezzo">
+                          </span><br>
+                      </div>
+                      <div class = "WrapEliminabutton2">
+                          <label></label><br>
+                          <button type="button" class="SchedaElimina" onclick="EliminaIngrediente()">Elimina</button>
+                      </div>
+                    </div>
+                      <button type="button" class="BigButton" onclick="EseguiModificaIngredienite()">Modifica</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  <!--box che fa vedere i risultati-->
+  <div id = 'result'></div>
+</div>
+</body>
+</html>

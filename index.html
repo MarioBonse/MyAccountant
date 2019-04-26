@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Mario Bonsembiante">
+    <meta name="description" content="hhh">
+    <title>MyAccountant</title>
+    <script src="js/general.js"></script>
+    <script src="js/inserimenti.js"></script>
+    <link rel="icon" href="img/simbolo.jpg" type="image/jpg">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+</head>
+
+<body >
+    <div class ="totalcontainer">
+    <!-- Title and short description -->
+    <div class = "headercontainer">
+      <div id='HeaderWrap'>
+          <header>
+              <h2 class="MainTitle"><span id="MyAccountant">MyAccountant</span></h2>
+              <h5 class="MainSubtitle">A tool maintening accounting of your ice-cream shop</h5>
+          </header>
+      </div>
+      <!--Menù di navigazione-->
+      <nav>
+          <ul class="MainMenu">
+              <li id="selezionato"><a href="#">Home</a></li>
+              <li><a href="ricettario.html">Ricettario</a></li>
+              <li><a href="produzione.html">Altre spese</a></li>
+              <li><a href="risultati.html">Risultati</a></li>
+          </ul>
+      </nav>
+    </div>
+    <!--corpo principale -->
+    <div class='MainWrap'>
+      <div class = "fillerbottom">
+        <div class = "containerdescription">
+        <h3 class="titledescription">Presentazione della application-web</h3>
+        <p class = "description">My accountant è un tool pensato per aiutare i gestori delle gelaterie a tenere la contabilità di essa.</p>
+        <p class = "description">Il sito è sviluppato in 4 pagine principali:</p>
+        <div class = "wraphomelists">
+          <ul>
+            <li>Home</li>
+            <li>Ricettario</li>
+            <li>Altre spese</li>
+            <li>Risultati</li>
+          </ul>
+        </div>
+      </div>
+        <div class = "containerdescription">
+          <h4 class = "titledescription">Ricettario</h4>
+          <p>Questa pagina è utilizzata per salvare, visualizzare e modificare gli ingredienti e le ricette del Database.</p>
+          <p>Gli ingredienti sono descritti da un nome, un fornitore e un prezzo.</p>
+          <p>Le ricette sono descritte da un nome, una breve descrizione e da una lista di quali ingredienti e in che quantità compongono la ricetta.
+            Gli ingredienti devono essere già stati inseriti nel Database.
+            Sono inoltre possibili modifiche alle ricette e agli ingredienti.</p>
+          <h4 class = "titledescription">Altre spese</h4>
+          <p>La pagina "Altre spese" è utilizzata per salvare altre spese che influenzano la contabilità. Queste possono essere di due tipi.
+          Il primo tipo è "oggettistica". Con questo si intendono tutti gli oggetti che possono essere venduti, consumati o buttati durante una giornata di lavoro.
+          Fanno parte di questa categoria le palette, i coni o anche alimenti extra venduti alla cassa.</p>
+          <p>Il secondo tipo di spese sono le spese a lungo termine. Queste comprendono bollette, tasse o in generale ammortamenti di ogni tipo.
+            La spesa verrà poi ammortizzata sulle produzioni del periodo.</p>
+          <p>Entrambe le voci sono modificabili e visualizzabili.</p>
+          <h4 class = "titledescription">Risultati</h4>
+          <p>L'ultima pagina è quella dei risultati. In questa finestra è possibile inserire il risultato della giornata o di una giornata qualsiasi.
+            Il risultato è caratterizzato dalla data, dal ricavo e da due liste: Quella dei gusti venduti e quella degli oggetti venduti.
+          <p>Come seconda opzione della finestra c'è quella di visualizare i risultati passati.
+            Questi risultati valutano le spese in base al prezzo degli ingredienti e degli oggetti nel giorno specifico e le spese a lungo termine, come detto già prima,
+            vengono invece ammortizzate sulle produzioni interne al loro periodo.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+</body>
+</html>
