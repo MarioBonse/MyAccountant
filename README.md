@@ -1,4 +1,12 @@
 # MyAccountant
-A web app for managing accounting for an ice cream shop.
-It's all written in native javascript and php. 
-Did it for an University project.
+
+![alt text](https://github.com/MarioBonse/MyAccountant/blob/master/img/myaccountant.PNG "Example")
+
+A web app for managing accounting for an ice cream shop :icecream: .
+User can introduce the products they have bought, the recipes the revenue, electric and water bill and other expenses. 
+Then they can visualize the daily results and more advance statistics are easily implementable. 
+:IT: Sadly It's in Italian :trollface: 
+
+It's all implemented in javascript, php and mySQL for database management. It doesn't use any external library. 
+
+
